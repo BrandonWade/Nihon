@@ -1,0 +1,22 @@
+html {
+  min-height: 100%;
+}
+body {
+  font: 10px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #353535;
+  background: linear-gradient(to bottom, #ffffff 0%, #dbdce2 76%, #c5c4d3 98%);
+}
+div#container {
+  padding: 0;
+  margin: 0;
+  font-size: 4.5em;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+div#container div#timerContainer {
+  font-size: 2.5em;
+  text-align: center;
+  margin: 0 auto;
+  width: 50%;
+}
