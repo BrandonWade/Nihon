@@ -5,6 +5,7 @@ body {
   font: 10px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #353535;
   background: linear-gradient(to bottom, #ffffff 0%, #dbdce2 76%, #c5c4d3 98%);
+  overflow-x: hidden;
 }
 div#container {
   padding: 0;
