@@ -52,7 +52,7 @@ function getRemainingTime(timeDiff) {
 
     days = padInput(parseInt(timeDiff));
 
-    isNear = (days == 0) && (hours <= 12);
+    isNear = (days == 0) && (hours <= 24);
     return (days + ":" + hours + ":" + minutes + ":" + seconds);
 }
 
