@@ -66,10 +66,9 @@ function padInput(input) {
 
 function finishedAnimation() {
     setTimeout(function() {
+        $(document.body).css('background', 'none');
         $("#contentContainer").fadeOut(250, function() {
-            $("#flagContainer").fadeIn(250, function() {
-                $(document.body).css('background', 'none');
-            });
+            $("#flagContainer").fadeIn(250);
         });
     }, 1500);
 }
