@@ -2,25 +2,38 @@
  * Created by Brandon W on 2016-03-23.
  */
 const INTERVAL_MILLISECONDS = 1000;
+const ZERO_STRING = "00:00:00:00";
 
-var endDate = new Date();
-endDate.setFullYear(2016, 3, 21);
-endDate.setHours(13, 20, 00);
-var endDateMilliseconds = endDate.getTime();
+var endDateTime = new Date();
+endDateTime.setFullYear(2016, 3, 21);
+endDateTime.setHours(13, 20, 00);
+var endDateMilliseconds = endDateTime.getTime();
 
 var currentDate = new Date();
 var currentDateMilliseconds = currentDate.getTime();
 
+var intervalTrigger = null;
+var isNear = false;
 
 $(window).on("load", function() {
-    setInterval(updateCounter, INTERVAL_MILLISECONDS);
+    intervalTrigger = setInterval(updateCounter, INTERVAL_MILLISECONDS);
 });
 
 var timeString = "";
 function updateCounter() {
-    currentDateMilliseconds += INTERVAL_MILLISECONDS;
-    timeString = getRemainingTime((endDateMilliseconds - currentDateMilliseconds) / 1000);
-    $("#timerContainer").text(timeString);
+    var currDateTime = new Date();
+
+    if (currDateTime < endDateTime) {
+        currentDateMilliseconds += INTERVAL_MILLISECONDS;
+        timeString = getRemainingTime((endDateMilliseconds - currentDateMilliseconds) / 1000);
+    } else {
+        timeString = ZERO_STRING;
+        window.clearInterval(intervalTrigger);
+        finishedAnimation();
+    }
+
+    var textColour = isNear ? "#ee1111" : "#353535";
+    $("#timerContainer").text(timeString).css('color', textColour);
 }
 
 var days = 0;
@@ -39,6 +52,7 @@ function getRemainingTime(timeDiff) {
 
     days = padInput(parseInt(timeDiff));
 
+    isNear = (days == 0) && (hours <= 12);
     return (days + ":" + hours + ":" + minutes + ":" + seconds);
 }
 
@@ -48,4 +62,14 @@ function padInput(input) {
     }
 
     return input;
+}
+
+function finishedAnimation() {
+    setTimeout(function() {
+        $("#contentContainer").fadeOut(250, function() {
+            $("#flagContainer").fadeIn(250, function() {
+                $(document.body).css('background', 'none');
+            });
+        });
+    }, 1500);
 }
